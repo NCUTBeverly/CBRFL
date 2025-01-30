@@ -1,0 +1,81 @@
+#数据集
+fds:
+  #  name: synthetic
+  #  name: fmnist
+  #  name: mnist
+#  name: shakespeare
+  name: sent140
+  args:
+#    part: 6
+#    client_num: 100
+#    val: 0.2
+#    test: 0.1
+#    major_class_num: 2
+#    dirichlet_alpha: 0.3
+#    dirichlet_min: 10
+#模型
+model:
+  #  name: mnist.MLP
+  #  name: MnistMLP
+  #  name: cnn.CNN21
+  name: sent140.MLP
+  #  name: synthetic.MLP
+#  name: shakespeare.RNN
+  args:
+#    num_classes: 10
+#训练器
+trainer:
+  names:
+#    - FedHyper
+#    - FedAvg
+#    - FedProx
+#    - FedAvgM
+#    - Scaffold
+#    - FedOpt
+#    - FedDyn
+#    - FedLA
+#    - FedMR
+#    - robust.CBRFL
+    - robust.CMFL
+  args:
+    tag: '_Low'
+    seed: 2077
+    round: 300
+    sample_rate: 0.05
+    batch_size: 32
+    epoch: 5
+    test_step: 5
+    glr: 1.
+    sds_rate: 0.03
+    # MOPT
+    beta: 0.6
+    opt:
+      name: SGD
+      args:
+        lr: 0.001
+    max_grad_norm: 3.
+    prox:
+      alpha: 1.
+    adp:
+      gopt: AdaGrad
+    dyn:
+      alpha: 0.01
+    la:
+      eps: 0.035
+      delay_step: 0
+    mr:
+      sync_idx: -2
+    cmfl:
+#      high: True
+      high: False
+      agg_rate: 0.4
+      ce_rate: 0.3
+    cbrfl:
+      alpha: 0.5
+      beta: 0.5
+      gamma: 3
+
+
+
+
+

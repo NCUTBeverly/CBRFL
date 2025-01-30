@@ -1,0 +1,66 @@
+#数据集
+fds:
+  name: synthetic
+  #  name: femnist
+  #  name: fmnist
+  #  name: cifar10
+  #  name: mnist
+  args:
+  #    part: 6
+  #    client_num: 100
+  #    val: 0.2
+  #    test: 0.1
+  #    major_class_num: 3
+  #    dirichlet_alpha: 0.3
+  #  dirichlet_min: 10
+#模型
+model:
+  #  name: mnist.MLP
+  #  name: cnn.CNN21
+  name: synthetic.MLP
+  args:
+#    num_classes: 10
+#训练器
+trainer:
+  names:
+    #    - robust.FedAvg
+    #    - robust.Baseline
+    #    - robust.CMFL
+    - robust.CBRFL
+    - robust.FLTrust
+    - robust.CMFL
+  #    - robust.Krum
+  #    - robust.MultiKrum
+  #    - robust.TrimmedMean
+  args:
+    seed: 2077
+    tag: '_0.7'
+    round: 50
+    sample_rate: 0.1
+    batch_size: 32
+    epoch: 5
+    test_step: 5
+    glr: 1.
+    sds_rate: 0.03
+    attack_rate: 0.7
+    attack_kind: lf
+    opt:
+      name: SGD
+      args:
+        lr: 0.002
+    max_grad_norm: 3.
+    cmfl:
+      high: False
+      agg_rate: 0.4
+      ce_rate: 0.4
+    cbrfl:
+      alpha: 0.5
+      beta: 0.5
+      gamma: 3
+    krum:
+      K: 2
+
+
+
+
+
